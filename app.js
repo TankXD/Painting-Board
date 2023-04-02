@@ -8,15 +8,23 @@ const modeBtn = document.getElementById("mode-btn");
 const destroyBtn = document.getElementById("destroy-btn");
 const eraserBtn = document.getElementById("eraser-btn");
 const fileInputBtn = document.getElementById("file");
+const textInput = document.getElementById("text");
+const saveBtn = document.getElementById("save");
 
 canvas.width = 800;
 canvas.height = 800;
 
 ctx.lineWidth = lineWidth.value;
+ctx.lineCap = "round";
 
 let isPainting = false;
 let isFilling = false;
 let fillColor = "";
+
+ctx.fillStyle = "white";
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+// 아무색으로도 배경을 칠하지 않은채로 download할 때 배경이 투명으로 되어있음
+// 배경을 칠한 후에 다운로드 하는 경우 상관없지만, 아예 칠하지 않고 다운로드하는 경우를 위해 흰색으로 미리 칠해줌
 
 function onMove(e) {
   if (!isPainting) {
@@ -101,8 +109,30 @@ function onFileChange(event) {
   image.src = url;
   image.addEventListener("load", () => {
     ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+    // fileInputBtn.value = null;
   });
   // 이미지가 로드된 경우 발생하는 이벤트
+}
+
+function onDoubleClick(event) {
+  const text = textInput.value;
+  if (text !== "") {
+    ctx.save();
+    ctx.lineWidth = 1;
+    ctx.font = "bold 64px serif";
+    ctx.fillText(text, event.offsetX, event.offsetY);
+    ctx.restore();
+  }
+}
+
+function onSaveClick() {
+  // console.log(canvas.toDataURL());
+  // const url = canvas.toDataURL("image/jpeg", 1.0);
+  const url = canvas.toDataURL();
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "ナイス！";
+  a.click();
 }
 
 canvas.addEventListener("mousemove", onMove);
@@ -117,6 +147,8 @@ canvas.addEventListener("click", onCanvasClick);
 destroyBtn.addEventListener("click", onDestroy);
 eraserBtn.addEventListener("click", onEraserMode);
 fileInputBtn.addEventListener("change", onFileChange);
+canvas.addEventListener("dblclick", onDoubleClick);
+saveBtn.addEventListener("click", onSaveClick);
 
 // ctx.rect(50, 50, 100, 100);
 // ctx.strokeStyle = "blue";
