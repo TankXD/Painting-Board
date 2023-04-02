@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <canvas></canvas>
+      <div id="setting">
+        <input
+          type="range"
+          id="line-width"
+          min="1"
+          max="10"
+          value="5"
+          step="0.1"
+        />
+        <input type="color" id="color" />
+        <div class="colors">
+          <div
+            class="color-option"
+            style="background-color: #ffffff"
+            data-color="#FFFFFF"
+          ></div>
+          <div
+            class="color-option"
+            style="background-color: #c56cf0"
+            data-color="#c56cf0"
+          ></div>
+          <div
+            class="color-option"
+            style="background-color: #ffb8b8"
+            data-color="#ffb8b8"
+          ></div>
+          <div
+            class="color-option"
+            style="background-color: #ff3838"
+            data-color="#ff3838"
+          ></div>
+          <div
+            class="color-option"
+            style="background-color: #ff9f1a"
+            data-color="#ff9f1a"
+          ></div>
+          <div
+            class="color-option"
+            style="background-color: #fff200"
+            data-color="#fff200"
+          ></div>
+          <div
+            class="color-option"
+            style="background-color: #32ff7e"
+            data-color="#32ff7e"
+          ></div>
+          <div
+            class="color-option"
+            style="background-color: #7efff5"
+            data-color="#7efff5"
+          ></div>
+          <div
+            class="color-option"
+            style="background-color: #18dcff"
+            data-color="#18dcff"
+          ></div>
+          <div
+            class="color-option"
+            style="background-color: #7d5fff"
+            data-color="#7d5fff"
+          ></div>
+          <div
+            class="color-option"
+            style="background-color: #4b4b4b"
+            data-color="#4b4b4b"
+          ></div>
+          <div
+            class="color-option"
+            style="background-color: #3d3d3d"
+            data-color="#3d3d3d"
+          ></div>
+        </div>
+      </div>
+      <button id="mode-btn">Draw Mode</button>
+      <button id="destroy-btn">Destroy</button>
+      <button id="eraser-btn">Eraser</button>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
