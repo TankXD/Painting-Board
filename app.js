@@ -1,16 +1,13 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
+// ctx = context의 약자, 자주 쓰이니까 ctx로 짧게 씀
 const lineWidth = document.getElementById("line-width");
 const canvasColor = document.getElementById("color");
 const colorOptions = document.querySelectorAll(".color-option");
-const test = document.getElementsByClassName("color-option");
-console.log(`querySelectorAll : ${colorOptions}`);
-console.log(`getElementsByClassName : ${test}`);
-
 const modeBtn = document.getElementById("mode-btn");
 const destroyBtn = document.getElementById("destroy-btn");
 const eraserBtn = document.getElementById("eraser-btn");
-// ctx = context의 약자, 자주 쓰이니까 ctx로 짧게 씀
+const fileInputBtn = document.getElementById("file");
 
 canvas.width = 800;
 canvas.height = 800;
@@ -93,6 +90,21 @@ function onEraserMode() {
   modeBtn.innerText = "Draw Mode";
 }
 
+function onFileChange(event) {
+  const file = event.target.files[0];
+  // input file요소로 파일을 업로드한 경우 event.target.files에 정보가 들어감.
+  console.log(file);
+  const url = URL.createObjectURL(file);
+  // file의 URL을 String(문자열)로 반환해줌
+  const image = document.createElement("img");
+  // const image = new Image(); 와 같음
+  image.src = url;
+  image.addEventListener("load", () => {
+    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+  });
+  // 이미지가 로드된 경우 발생하는 이벤트
+}
+
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", onDown);
 canvas.addEventListener("mouseup", cancelPainting);
@@ -104,6 +116,7 @@ modeBtn.addEventListener("click", onModeChange);
 canvas.addEventListener("click", onCanvasClick);
 destroyBtn.addEventListener("click", onDestroy);
 eraserBtn.addEventListener("click", onEraserMode);
+fileInputBtn.addEventListener("change", onFileChange);
 
 // ctx.rect(50, 50, 100, 100);
 // ctx.strokeStyle = "blue";
