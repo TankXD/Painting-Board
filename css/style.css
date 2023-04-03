@@ -1,0 +1,102 @@
+@import "reset.css";
+
+:root {
+  --main-width: 1200px;
+  --canvas-width: 600px;
+  --canvas-height: 600px;
+  --shadow-normal: 2px 2px 5px rgba(0, 0, 0, 0.15);
+  --canvas-radius: 5px;
+  --blue: #b9cfe9;
+  --navy: #556f94;
+  --h-font-color: black;
+  --body-color: whitesmoke;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 600;
+}
+h4 {
+  color: white;
+}
+
+canvas {
+  width: var(--canvas-width);
+  height: var(--canvas-height);
+  border-radius: var(--canvas-radius);
+  background-color: white;
+  margin: 0 14px 0 14px;
+}
+
+body {
+  width: 100vw;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: var(--body-color);
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: var(--main-width);
+  margin-top: 16px;
+}
+
+#main__left {
+  width: calc((var(--main-width) - var(--canvas-width)) / 2);
+  height: var(--canvas-height);
+}
+
+#main__right {
+  width: calc((var(--main-width) - var(--canvas-width)) / 2);
+  height: var(--canvas-height);
+}
+
+#main__left,
+#main__right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--navy);
+  box-shadow: var(--shadow-normal);
+  border-radius: var(--canvas-radius);
+}
+
+.container:not(#pallette__container) {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+}
+
+.inside__box {
+  gap: 8px;
+  margin: 8px 0 36px 0;
+}
+
+#line-width {
+  width: 80%;
+}
+
+.colors {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.color-option {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  border-radius: 50%;
+  /* border: 1px solid rgb(35, 6, 6); */
+}

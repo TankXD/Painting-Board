@@ -4,15 +4,19 @@ const ctx = canvas.getContext("2d");
 const lineWidth = document.getElementById("line-width");
 const canvasColor = document.getElementById("color");
 const colorOptions = document.querySelectorAll(".color-option");
-const modeBtn = document.getElementById("mode-btn");
+// const modeBtn = document.getElementById("mode-btn");
+const modeBtnDraw = document.querySelector(".mode-btn__draw");
+const modeBtnFill = document.querySelector(".mode-btn__fill");
+const modeBtnEraser = document.querySelector(".mode-btn__eraser");
 const destroyBtn = document.getElementById("destroy-btn");
-const eraserBtn = document.getElementById("eraser-btn");
 const fileInputBtn = document.getElementById("file");
 const textInput = document.getElementById("text");
 const saveBtn = document.getElementById("save");
+const textSizeBtn = document.getElementById("text-size");
+const textWeightBtn = document.getElementById("text-weight");
 
-canvas.width = 800;
-canvas.height = 800;
+canvas.width = 600;
+canvas.height = 600;
 
 ctx.lineWidth = lineWidth.value;
 ctx.lineCap = "round";
@@ -20,11 +24,13 @@ ctx.lineCap = "round";
 let isPainting = false;
 let isFilling = false;
 let fillColor = "";
+let textSize = "64px";
+let textWeight = "bold";
 
-ctx.fillStyle = "white";
-ctx.fillRect(0, 0, canvas.width, canvas.height);
-// 아무색으로도 배경을 칠하지 않은채로 download할 때 배경이 투명으로 되어있음
-// 배경을 칠한 후에 다운로드 하는 경우 상관없지만, 아예 칠하지 않고 다운로드하는 경우를 위해 흰색으로 미리 칠해줌
+// ctx.fillStyle = "white";
+// ctx.fillRect(0, 0, canvas.width, canvas.height);
+// // 아무색으로도 배경을 칠하지 않은채로 download할 때 배경이 투명으로 되어있음
+// // 배경을 칠한 후에 다운로드 하는 경우 상관없지만, 아예 칠하지 않고 다운로드하는 경우를 위해 흰색으로 미리 칠해줌
 
 function onMove(e) {
   if (!isPainting) {
@@ -35,8 +41,8 @@ function onMove(e) {
   }
 }
 function onDown(e) {
-  isPainting = true;
   onFillCanvas();
+  isPainting = true;
 }
 
 function cancelPainting() {
@@ -71,15 +77,24 @@ function onColorClick(e) {
   ctx.fillStyle = selectedColor;
   saveFillColor();
 }
-function onModeChange(e) {
-  if (!isFilling) {
-    isFilling = true;
-    modeBtn.innerText = "Fill Mode";
-  } else {
-    isFilling = false;
-    modeBtn.innerText = "Draw Mode";
-  }
+
+function onDrawMode() {
+  isFilling = false;
 }
+
+function onFillMode() {
+  isFilling = true;
+  console.log(ctx.strokeStyle);
+}
+// function onModeChange(e) {
+//   if (!isFilling) {
+//     isFilling = true;
+//     modeBtn.innerText = "Fill Mode";
+//   } else {
+//     isFilling = false;
+//     modeBtn.innerText = "Draw Mode";
+//   }
+// }
 
 function onCanvasClick() {
   if (isFilling) {
@@ -95,12 +110,13 @@ function onDestroy() {
 function onEraserMode() {
   ctx.strokeStyle = "white";
   isFilling = false;
-  modeBtn.innerText = "Draw Mode";
+  // modeBtn.innerText = "Draw Mode";
 }
 
 function onFileChange(event) {
   const file = event.target.files[0];
   // input file요소로 파일을 업로드한 경우 event.target.files에 정보가 들어감.
+  // files가 배열인 이유는 input type="file"태그에서 multiple속성을 넣으면 파일을 여러개 넣을 수 있어서임.
   console.log(file);
   const url = URL.createObjectURL(file);
   // file의 URL을 String(문자열)로 반환해줌
@@ -119,20 +135,28 @@ function onDoubleClick(event) {
   if (text !== "") {
     ctx.save();
     ctx.lineWidth = 1;
-    ctx.font = "bold 64px serif";
+    ctx.font = `${textWeight} ${textSize} serif`;
     ctx.fillText(text, event.offsetX, event.offsetY);
+    console.log(ctx.font);
     ctx.restore();
   }
 }
 
 function onSaveClick() {
-  // console.log(canvas.toDataURL());
-  // const url = canvas.toDataURL("image/jpeg", 1.0);
   const url = canvas.toDataURL();
   const a = document.createElement("a");
   a.href = url;
-  a.download = "ナイス！";
+  a.download = "ありがとうございます！";
   a.click();
+}
+
+function onTextSizeChange() {
+  textSize = `${textSizeBtn.value}px`;
+}
+
+function onTextWeightChange() {
+  textWeight = textWeightBtn.value;
+  console.log(textWeight);
 }
 
 canvas.addEventListener("mousemove", onMove);
@@ -142,13 +166,17 @@ canvas.addEventListener("mouseleave", cancelPainting);
 lineWidth.addEventListener("change", onLineWidthChange);
 canvasColor.addEventListener("change", onColorChange);
 colorOptions.forEach((color) => color.addEventListener("click", onColorClick));
-modeBtn.addEventListener("click", onModeChange);
+// modeBtn.addEventListener("click", onModeChange);
+modeBtnDraw.addEventListener("click", onDrawMode);
+modeBtnFill.addEventListener("click", onFillMode);
+modeBtnEraser.addEventListener("click", onEraserMode);
 canvas.addEventListener("click", onCanvasClick);
 destroyBtn.addEventListener("click", onDestroy);
-eraserBtn.addEventListener("click", onEraserMode);
 fileInputBtn.addEventListener("change", onFileChange);
 canvas.addEventListener("dblclick", onDoubleClick);
 saveBtn.addEventListener("click", onSaveClick);
+textSizeBtn.addEventListener("change", onTextSizeChange);
+textWeightBtn.addEventListener("change", onTextWeightChange);
 
 // ctx.rect(50, 50, 100, 100);
 // ctx.strokeStyle = "blue";
