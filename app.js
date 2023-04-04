@@ -4,7 +4,7 @@ const ctx = canvas.getContext("2d");
 const lineWidth = document.getElementById("line-width");
 const canvasColor = document.getElementById("color");
 const colorOptions = document.querySelectorAll(".color-option");
-// const modeBtn = document.getElementById("mode-btn");
+const modeBtns = document.getElementById("mode-btns");
 const modeBtnDraw = document.querySelector(".mode-btn__draw");
 const modeBtnFill = document.querySelector(".mode-btn__fill");
 const modeBtnEraser = document.querySelector(".mode-btn__eraser");
@@ -30,6 +30,8 @@ let isTexting = false;
 let fillColor = "";
 let textSize = "64px";
 let textWeight = "bold";
+
+let selectedBtn = null;
 
 // ctx.fillStyle = "white";
 // ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -196,6 +198,20 @@ function onTextWeightChange() {
   }
 }
 
+function onActiveBtn(e) {
+  // 이미 선택된 버튼이 있는 경우
+  if (selectedBtn) {
+    // 이미 선택된 버튼과 새로 누른 버튼이 다르다면
+    if (selectedBtn !== e.target) {
+      // 이미 선택됬던 버튼의 active클래스 삭제
+      selectedBtn.classList.remove("active");
+      // 누른 타겟에 active클래스 할당
+    }
+  }
+  e.target.classList.add("active");
+  selectedBtn = e.target;
+}
+
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", onDown);
 canvas.addEventListener("mouseup", cancelPainting);
@@ -204,15 +220,16 @@ lineWidth.addEventListener("change", onLineWidthChange);
 canvasColor.addEventListener("change", onColorChange);
 colorOptions.forEach((color) => color.addEventListener("click", onColorClick));
 // modeBtn.addEventListener("click", onModeChange);
+modeBtns.addEventListener("click", onActiveBtn);
+
 modeBtnDraw.addEventListener("click", onDrawMode);
 modeBtnFill.addEventListener("click", onFillMode);
 modeBtnEraser.addEventListener("click", onEraserMode);
+modeBtnText.addEventListener("click", onTextMode);
+// canvas.addEventListener("dblclick", onDoubleClick);
 canvas.addEventListener("click", onCanvasClick);
 destroyBtn.addEventListener("click", onDestroy);
 fileInputBtn.addEventListener("change", onFileChange);
-
-modeBtnText.addEventListener("click", onTextMode);
-// canvas.addEventListener("dblclick", onDoubleClick);
 
 saveBtn.addEventListener("click", onSaveClick);
 textSizeBtn.addEventListener("change", onTextSizeChange);

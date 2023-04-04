@@ -1,11 +1,12 @@
 @import "reset.css";
-
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
 :root {
   --main-width: 1300px;
   --canvas-width: 600px;
   --canvas-height: 600px;
   --shadow-normal: 2px 2px 5px rgba(0, 0, 0, 0.15);
   --canvas-radius: 5px;
+  --sky: #ceeeff;
   --blue: #b9cfe9;
   --navy: #435c7e;
   /* --navy: #246b8473; */
@@ -16,6 +17,7 @@
 
 * {
   box-sizing: border-box;
+  font-family: "Ubuntu", sans-serif;
 }
 
 h1 {
@@ -26,6 +28,7 @@ h1 {
 h2,
 h4:not(.label__description) {
   color: white;
+  font-weight: 600;
 }
 
 canvas {
@@ -52,7 +55,7 @@ main {
   justify-content: center;
   align-items: center;
   max-width: var(--main-width);
-  margin-top: 16px;
+  margin-top: 48px;
 }
 
 #main__left {
@@ -77,6 +80,11 @@ main {
   padding: 8px 0;
 }
 
+.main__logo {
+  margin: 32px 0;
+  font-size: 32px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -89,15 +97,19 @@ main {
 
 .inside__box {
   gap: 8px;
-  margin: 8px 0 36px 0;
-  padding: 16px;
+
+  padding: 16px 0;
   border: 1px solid rgba(245, 245, 220, 0.503);
   border-radius: 5px;
+}
+.inside__box:not(#text__box) {
+  margin: 8px 0 36px 0;
 }
 
 input[type="range"],
 #line-width {
-  width: 100%;
+  width: 90%;
+  cursor: pointer;
 }
 
 .colors {
@@ -108,8 +120,8 @@ input[type="range"],
 }
 
 .color-option {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
   border-radius: 50%;
   border: 3px solid rgba(255, 255, 255, 0.347);
@@ -117,6 +129,7 @@ input[type="range"],
 }
 
 #preview {
+  margin-top: 8px;
   width: 100%;
   height: 300px;
   border: 3px solid white;
@@ -139,16 +152,35 @@ label {
   text-align: center;
   background-color: white;
   border-radius: 5px;
+  cursor: pointer;
+}
+
+#text__box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 8px 0 24px 0;
 }
 
 .text__box-detail {
-  width: 100%;
+  width: 90%;
   display: flex;
   justify-content: space-around;
 }
 .text__box-detail input {
+  all: unset;
   width: 70%;
+  height: 32px;
+  border: none;
+  background-color: white;
 }
+
+input::placeholder {
+  text-align: start;
+  padding: 8px;
+  font-size: 13px;
+}
+
 .text__box-detail select,
 button {
   width: 28%;
@@ -163,8 +195,40 @@ button {
 #buttons {
   width: 90%;
   display: flex;
+  gap: 6px;
 }
 
 #buttons button {
   width: 50%;
+  height: 42px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+button {
+  border: 2px solid rgba(0, 0, 0, 0.114);
+  background-color: white;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.68);
+  cursor: pointer;
+}
+
+#mode-btns {
+  width: 100%;
+}
+
+#mode-btns button {
+  width: 22%;
+  height: 32px;
+  font-size: 12px;
+}
+
+#mode-btns button:hover {
+  background-color: var(--sky);
+}
+
+#mode-btns button.active {
+  background-color: #abd1e6;
+
+  /* color: white; */
 }

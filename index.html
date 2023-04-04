@@ -11,6 +11,7 @@
     <h1>Painting Board🌈</h1>
     <main>
       <section id="main__left">
+        <h2 class="main__logo">🎨</h2>
         <div id="brush__container" class="container">
           <h4>Brush Size</h4>
           <div class="inside__box">
@@ -26,7 +27,7 @@
         </div>
         <div id="mode__container" class="container">
           <h4>Mode</h4>
-          <div class="inside__box">
+          <div id="mode-btns" class="inside__box">
             <button class="mode-btn__draw">PEN</button>
             <button class="mode-btn__fill">FILL</button>
             <button class="mode-btn__eraser">ERASER</button>
@@ -117,13 +118,14 @@
         </div>
         <div id="text__container" class="container">
           <h4>Text</h4>
-          <div class="text__box inside__box">
+          <div id="text__box" class="inside__box">
             <input type="range" min="8" max="100" value="64" id="text-size" />
             <div class="text__box-detail">
               <input
                 type="text"
                 id="text"
-                placeholder="入力した後、ダブルクリック"
+                class="text__input"
+                placeholder=" 入力した後、TEXTモード"
               />
               <button id="text-weight">Bold</button>
               <!-- <select id="text-weight">
