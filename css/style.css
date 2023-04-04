@@ -10,9 +10,9 @@
   --blue: #b9cfe9;
   --navy: #435c7e;
   /* --navy: #246b8473; */
-  --green: #6ba479;
+  --bg-main: #6ba479;
   --h-font-color: black;
-  --body-color: #e6eaf4;
+  --body-color: rgb(222 222 210);
 }
 
 * {
@@ -23,12 +23,14 @@
 h1 {
   font-size: 28px;
   font-weight: 600;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  text-shadow: 2px 2px 4px rgb(255 255 255);
+  color: #484848;
 }
 h2,
-h4:not(.label__description) {
+h4:not(.label__description),
+legend {
   color: white;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 canvas {
@@ -74,7 +76,7 @@ main {
   flex-direction: column;
   /* justify-content: center; */
   align-items: center;
-  background-color: var(--navy);
+  background-color: var(--bg-main);
   box-shadow: var(--shadow-normal);
   border-radius: var(--canvas-radius);
   padding: 8px 0;
@@ -98,7 +100,7 @@ main {
 .inside__box {
   gap: 8px;
 
-  padding: 16px 0;
+  padding: 16px 6px;
   border: 1px solid rgba(245, 245, 220, 0.503);
   border-radius: 5px;
 }
@@ -112,24 +114,49 @@ input[type="range"],
   cursor: pointer;
 }
 
+.color__box {
+  background-color: rgba(255, 255, 255, 0.096);
+}
 .colors {
   display: flex;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
 .color-option {
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   cursor: pointer;
   border-radius: 50%;
-  border: 3px solid rgba(255, 255, 255, 0.347);
+  border: 2px solid rgba(255, 255, 255, 0.6);
   margin-bottom: 16px;
+}
+.color-option:hover {
+  transition: all 0.3s ease-in-out;
+  transform: scale(1.2);
+}
+
+.colors,
+.color-selector {
+  /* margin: 0 4px; */
+}
+
+.color-selector {
+  display: flex;
+  justify-content: end;
+}
+.color-selector #color {
+  border: none;
+  border-radius: 5px;
+  width: 48px;
+  /* height: 24px; */
+  background-color: rgba(255, 255, 255, 0.9);
+  margin: 8px 8px 0 0;
 }
 
 #preview {
-  margin-top: 8px;
+  margin-top: 16px;
   width: 100%;
   height: 300px;
   border: 3px solid white;
@@ -150,15 +177,25 @@ label {
   margin: 8px 0 16px 0;
   padding: 16px 32px;
   text-align: center;
-  background-color: white;
+  background-color: #f8faff;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 18px;
+  border: 2px solid rgba(0, 0, 0, 0.114);
+}
+
+label:hover {
+  /* background-color: #55a0dd; */
+  background-color: rgb(255, 247, 231);
+
+  /* color: white; */
 }
 
 #text__box {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: start;
   margin: 8px 0 24px 0;
 }
 
@@ -166,13 +203,19 @@ label {
   width: 90%;
   display: flex;
   justify-content: space-around;
+  gap: 8px;
 }
 .text__box-detail input {
   all: unset;
   width: 70%;
   height: 32px;
   border: none;
+  text-align: center;
   background-color: white;
+}
+
+#text-weight {
+  font-size: 12px;
 }
 
 input::placeholder {
@@ -195,14 +238,23 @@ button {
 #buttons {
   width: 90%;
   display: flex;
-  gap: 6px;
+  justify-content: space-around;
+  /* gap: 6px; */
 }
 
 #buttons button {
-  width: 50%;
+  width: 47%;
   height: 42px;
   font-size: 16px;
   font-weight: 500;
+  background-color: #1f2a08;
+  border-radius: 18px;
+  color: white;
+}
+
+#buttons button:hover {
+  background-color: #1f2a08eb;
+  /* color: white; */
 }
 
 button {
@@ -224,11 +276,19 @@ button {
 }
 
 #mode-btns button:hover {
-  background-color: var(--sky);
+  /* background-color: var(--sky); */
+  background-color: rgb(254, 254, 226);
+  /* color: white; */
 }
 
 #mode-btns button.active {
-  background-color: #abd1e6;
+  /* background-color: #abd1e6; */
+  background-color: rgb(255 255 164);
+  /* color: white; */
+  /* transform: scale(1.03); */
+}
 
+#text-weight:hover {
+  background-color: rgb(249, 248, 248);
   /* color: white; */
 }

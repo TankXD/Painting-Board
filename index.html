@@ -99,7 +99,9 @@
                 data-color="#3d3d3d"
               ></div>
             </div>
-            <input type="color" id="color" />
+            <div class="color-selector">
+              <input type="color" id="color" />
+            </div>
           </div>
         </div>
       </section>
@@ -107,18 +109,18 @@
 
       <section id="main__right">
         <div id="image__container" class="container">
-          <h2 class="preview-title">PreView</h2>
+          <!-- <h2 class="preview-title">PreView</h2> -->
           <div id="preview">
             <!-- <img class="preview-img" src="" alt="previewImage" /> -->
           </div>
           <label for="file">
-            <h4 class="label__description">📸Add Photo</h4>
+            <h4 class="label__description">📸 Add Photo</h4>
             <input type="file" accept="image/*" id="file" />
           </label>
         </div>
         <div id="text__container" class="container">
-          <h4>Text</h4>
-          <div id="text__box" class="inside__box">
+          <fieldset id="text__box" class="inside__box">
+            <legend>Text</legend>
             <input type="range" min="8" max="100" value="64" id="text-size" />
             <div class="text__box-detail">
               <input
@@ -133,7 +135,7 @@
                 <option value="normal">Normal</option>
               </select> -->
             </div>
-          </div>
+          </fieldset>
         </div>
         <div id="buttons">
           <button id="destroy-btn">REMOVE</button>
