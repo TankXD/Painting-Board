@@ -1,15 +1,17 @@
 @import "reset.css";
 
 :root {
-  --main-width: 1200px;
+  --main-width: 1300px;
   --canvas-width: 600px;
   --canvas-height: 600px;
   --shadow-normal: 2px 2px 5px rgba(0, 0, 0, 0.15);
   --canvas-radius: 5px;
   --blue: #b9cfe9;
-  --navy: #556f94;
+  --navy: #435c7e;
+  /* --navy: #246b8473; */
+  --green: #6ba479;
   --h-font-color: black;
-  --body-color: whitesmoke;
+  --body-color: #e6eaf4;
 }
 
 * {
@@ -19,8 +21,10 @@
 h1 {
   font-size: 28px;
   font-weight: 600;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
-h4 {
+h2,
+h4:not(.label__description) {
   color: white;
 }
 
@@ -65,30 +69,40 @@ main {
 #main__right {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   background-color: var(--navy);
   box-shadow: var(--shadow-normal);
   border-radius: var(--canvas-radius);
+  padding: 8px 0;
 }
 
-.container:not(#pallette__container) {
+.container {
   display: flex;
   flex-direction: column;
-  width: 95%;
+  width: 90%;
+}
+
+.container h4:not(.label__description) {
+  text-align: start;
 }
 
 .inside__box {
   gap: 8px;
   margin: 8px 0 36px 0;
+  padding: 16px;
+  border: 1px solid rgba(245, 245, 220, 0.503);
+  border-radius: 5px;
 }
 
+input[type="range"],
 #line-width {
-  width: 80%;
+  width: 100%;
 }
 
 .colors {
   display: flex;
+  justify-content: center;
   gap: 6px;
   flex-wrap: wrap;
 }
@@ -98,5 +112,59 @@ main {
   height: 50px;
   cursor: pointer;
   border-radius: 50%;
-  /* border: 1px solid rgb(35, 6, 6); */
+  border: 3px solid rgba(255, 255, 255, 0.347);
+  margin-bottom: 16px;
+}
+
+#preview {
+  width: 100%;
+  height: 300px;
+  border: 3px solid white;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+#preview img {
+  width: 100%;
+  height: 100%;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+label {
+  margin: 8px 0 16px 0;
+  padding: 16px 32px;
+  text-align: center;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.text__box-detail {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.text__box-detail input {
+  width: 70%;
+}
+.text__box-detail select,
+button {
+  width: 28%;
+}
+
+.text__box-detail input,
+select,
+button {
+  border-radius: 5px;
+}
+
+#buttons {
+  width: 90%;
+  display: flex;
+}
+
+#buttons button {
+  width: 50%;
 }

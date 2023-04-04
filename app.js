@@ -10,6 +10,8 @@ const modeBtnFill = document.querySelector(".mode-btn__fill");
 const modeBtnEraser = document.querySelector(".mode-btn__eraser");
 const destroyBtn = document.getElementById("destroy-btn");
 const fileInputBtn = document.getElementById("file");
+const preview = document.getElementById("preview");
+const previewImg = document.createElement("img");
 const textInput = document.getElementById("text");
 const saveBtn = document.getElementById("save");
 const textSizeBtn = document.getElementById("text-size");
@@ -125,6 +127,8 @@ function onFileChange(event) {
   image.src = url;
   image.addEventListener("load", () => {
     ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+    previewImg.src = url;
+    preview.appendChild(previewImg);
     // fileInputBtn.value = null;
   });
   // 이미지가 로드된 경우 발생하는 이벤트
@@ -155,8 +159,13 @@ function onTextSizeChange() {
 }
 
 function onTextWeightChange() {
-  textWeight = textWeightBtn.value;
-  console.log(textWeight);
+  if (textWeight === "bold") {
+    textWeight = "normal";
+    textWeightBtn.innerText = "Normal";
+  } else {
+    textWeight = "bold";
+    textWeightBtn.innerText = "Bold";
+  }
 }
 
 canvas.addEventListener("mousemove", onMove);
@@ -176,7 +185,7 @@ fileInputBtn.addEventListener("change", onFileChange);
 canvas.addEventListener("dblclick", onDoubleClick);
 saveBtn.addEventListener("click", onSaveClick);
 textSizeBtn.addEventListener("change", onTextSizeChange);
-textWeightBtn.addEventListener("change", onTextWeightChange);
+textWeightBtn.addEventListener("click", onTextWeightChange);
 
 // ctx.rect(50, 50, 100, 100);
 // ctx.strokeStyle = "blue";

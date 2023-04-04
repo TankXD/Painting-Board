@@ -10,7 +10,7 @@
   <body>
     <h1>Painting Board🌈</h1>
     <main>
-      <div id="main__left">
+      <section id="main__left">
         <div id="brush__container" class="container">
           <h4>Brush Size</h4>
           <div class="inside__box">
@@ -101,20 +101,43 @@
             <input type="color" id="color" />
           </div>
         </div>
-      </div>
+      </section>
       <canvas id="main__center"></canvas>
 
-      <div id="main__right">
-        <input type="file" accept="image/*" id="file" />
-        <input type="number" min="1" value="64" id="text-size" />
-        <select id="text-weight">
-          <option value="bold">Bold</option>
-          <option value="normal">Normal</option>
-        </select>
-        <input type="text" id="text" placeholder="入力した後、ダブルクリック" />
-        <button id="destroy-btn">REMOVE</button>
-        <button id="save">DOWNLOAD</button>
-      </div>
+      <section id="main__right">
+        <div id="image__container" class="container">
+          <h2 class="preview-title">PreView</h2>
+          <div id="preview">
+            <!-- <img class="preview-img" src="" alt="previewImage" /> -->
+          </div>
+          <label for="file">
+            <h4 class="label__description">📸Add Photo</h4>
+            <input type="file" accept="image/*" id="file" />
+          </label>
+        </div>
+        <div id="text__container" class="container">
+          <h4>Text</h4>
+          <div class="text__box inside__box">
+            <input type="range" min="8" max="100" value="64" id="text-size" />
+            <div class="text__box-detail">
+              <input
+                type="text"
+                id="text"
+                placeholder="入力した後、ダブルクリック"
+              />
+              <button id="text-weight">Bold</button>
+              <!-- <select id="text-weight">
+                <option value="bold">Bold</option>
+                <option value="normal">Normal</option>
+              </select> -->
+            </div>
+          </div>
+        </div>
+        <div id="buttons">
+          <button id="destroy-btn">REMOVE</button>
+          <button id="save">DOWNLOAD</button>
+        </div>
+      </section>
     </main>
     <script src="app.js"></script>
   </body>
