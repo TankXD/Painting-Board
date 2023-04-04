@@ -8,6 +8,7 @@ const colorOptions = document.querySelectorAll(".color-option");
 const modeBtnDraw = document.querySelector(".mode-btn__draw");
 const modeBtnFill = document.querySelector(".mode-btn__fill");
 const modeBtnEraser = document.querySelector(".mode-btn__eraser");
+const modeBtnText = document.querySelector(".mode-btn__text");
 const destroyBtn = document.getElementById("destroy-btn");
 const fileInputBtn = document.getElementById("file");
 const preview = document.getElementById("preview");
@@ -25,6 +26,7 @@ ctx.lineCap = "round";
 
 let isPainting = false;
 let isFilling = false;
+let isTexting = false;
 let fillColor = "";
 let textSize = "64px";
 let textWeight = "bold";
@@ -43,8 +45,11 @@ function onMove(e) {
   }
 }
 function onDown(e) {
+  onTextCanvas(e);
   onFillCanvas();
-  isPainting = true;
+  if (!isTexting) {
+    isPainting = true;
+  }
 }
 
 function cancelPainting() {
@@ -58,6 +63,20 @@ function onLineWidthChange(e) {
 
 function saveFillColor() {
   fillColor = ctx.fillStyle;
+}
+
+function onTextCanvas(e) {
+  if (isTexting) {
+    const text = textInput.value;
+    if (text !== "") {
+      ctx.save();
+      ctx.lineWidth = 1;
+      ctx.font = `${textWeight} ${textSize} serif`;
+      ctx.fillText(text, event.offsetX, event.offsetY);
+      console.log(ctx.font);
+      ctx.restore();
+    }
+  }
 }
 
 function onFillCanvas() {
@@ -81,7 +100,9 @@ function onColorClick(e) {
 }
 
 function onDrawMode() {
+  isPainting = true;
   isFilling = false;
+  isTexting = false;
 }
 
 function onFillMode() {
@@ -112,6 +133,7 @@ function onDestroy() {
 function onEraserMode() {
   ctx.strokeStyle = "white";
   isFilling = false;
+  isTexting = false;
   // modeBtn.innerText = "Draw Mode";
 }
 
@@ -134,17 +156,23 @@ function onFileChange(event) {
   // 이미지가 로드된 경우 발생하는 이벤트
 }
 
-function onDoubleClick(event) {
-  const text = textInput.value;
-  if (text !== "") {
-    ctx.save();
-    ctx.lineWidth = 1;
-    ctx.font = `${textWeight} ${textSize} serif`;
-    ctx.fillText(text, event.offsetX, event.offsetY);
-    console.log(ctx.font);
-    ctx.restore();
-  }
+function onTextMode() {
+  isTexting = true;
+  isPainting = false;
+  isFilling = false;
 }
+
+// function onDoubleClick(event) {
+//   const text = textInput.value;
+//   if (text !== "") {
+//     ctx.save();
+//     ctx.lineWidth = 1;
+//     ctx.font = `${textWeight} ${textSize} serif`;
+//     ctx.fillText(text, event.offsetX, event.offsetY);
+//     console.log(ctx.font);
+//     ctx.restore();
+//   }
+// }
 
 function onSaveClick() {
   const url = canvas.toDataURL();
@@ -182,7 +210,10 @@ modeBtnEraser.addEventListener("click", onEraserMode);
 canvas.addEventListener("click", onCanvasClick);
 destroyBtn.addEventListener("click", onDestroy);
 fileInputBtn.addEventListener("change", onFileChange);
-canvas.addEventListener("dblclick", onDoubleClick);
+
+modeBtnText.addEventListener("click", onTextMode);
+// canvas.addEventListener("dblclick", onDoubleClick);
+
 saveBtn.addEventListener("click", onSaveClick);
 textSizeBtn.addEventListener("change", onTextSizeChange);
 textWeightBtn.addEventListener("click", onTextWeightChange);
